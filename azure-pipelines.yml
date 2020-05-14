@@ -34,4 +34,6 @@ steps:
   displayName: Publish artifacts
 
 pr:
-- develop
+  branches:
+    include:
+    - develop
