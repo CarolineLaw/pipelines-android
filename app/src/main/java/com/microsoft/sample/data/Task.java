@@ -26,6 +26,8 @@ import java.util.UUID;
 
 /**
  * Immutable model class for a Task.
+ *
+ * Hopefully this change does not trigger the azure pipeline to run.
  */
 public final class Task {
 
