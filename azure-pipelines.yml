@@ -37,7 +37,6 @@ resources:
   repositories:
     - repository: pipelines-android
       type: GitHub
-      source: CarolineLaw/pipelines-android
-      pr:
-        branches:
-          - develop
+pr:
+  branches:
+    - develop
