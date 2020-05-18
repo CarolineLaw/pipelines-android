@@ -33,11 +33,5 @@ steps:
     artifactType: 'container'
   displayName: Publish artifacts
 
-resources:
-  repositories:
-    - repository: pipelines-android
-      type: GitHub
-      name: CarolineLaw/pipelines-android
-pr:
-  branches:
-    - develop
+trigger:
+  - develop
