@@ -10,23 +10,22 @@ stages:
     condition: eq(variables['Build.Reason'], 'Schedule')
     jobs:
       - template: security-scans.yml
+      pool:
+        vmImage: 'ubuntu-latest'
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleDebug test'
-  displayName: gradlew assembleDebug test
+      steps:
+      - task: Gradle@2
+        inputs:
+          workingDirectory: ''
+          gradleWrapperFile: 'gradlew'
+          gradleOptions: '-Xmx3072m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.8'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: true
+          testResultsFiles: '**/TEST-*.xml'
+          tasks: 'assembleDebug test'
+        displayName: gradlew assembleDebug test
 
 - task: CopyFiles@2
   inputs:
