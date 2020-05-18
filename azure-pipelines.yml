@@ -3,6 +3,9 @@
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
+trigger:
+  - develop
+
 stages:
   - stage: Security
     displayName: "Security Scans - "
@@ -10,11 +13,11 @@ stages:
     condition: eq(variables['Build.Reason'], 'Schedule')
     jobs:
       - template: security-scans.yml
-      pool:
+    pool:
         vmImage: 'ubuntu-latest'
 
-      steps:
-      - task: Gradle@2
+        steps:
+        - task: Gradle@2
         inputs:
           workingDirectory: ''
           gradleWrapperFile: 'gradlew'
@@ -25,20 +28,5 @@ stages:
           publishJUnitResults: true
           testResultsFiles: '**/TEST-*.xml'
           tasks: 'assembleDebug test'
-        displayName: gradlew assembleDebug test
+          displayName: gradlew assembleDebug test
 
-      - task: CopyFiles@2
-        inputs:
-          contents: '**/*.apk'
-          targetFolder: '$(build.artifactStagingDirectory)'
-        displayName: Copy .apk files to artifact staging directory
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          pathToPublish: '$(build.artifactStagingDirectory)'
-          artifactName: 'drop'
-          artifactType: 'container'
-        displayName: Publish artifacts
-
-trigger:
-  - develop
