@@ -3,35 +3,50 @@
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
-pool:
-  vmImage: 'ubuntu-latest'
+variables:
+  - group: Security-Scanning-tokens
 
-steps:
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleDebug test'
-  displayName: gradlew assembleDebug test
+stages:
+  - stage: Security
+    displayName: "Security Scans - "
+    dependsOn: []
+    jobs:
+      - job: Blackduck
+        displayName: Blackduck Scan
+        steps:
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              export DETECT_PROJECT_NAME="PipelinePractice"
+              export DETECT_PROJECT_VERSION_NAME="In_Development"
+              export BLACKDUCK_URL="https://willowtree.app.blackduck.com/"
+              export BLACKDUCK_API_TOKEN="ZDk2ODRlZDctNGMyMS00YTNiLTkxMzctNTJhMTU2Y2UzMWE2OjhkMjA3NWUxLTMxY2YtNDk0ZS05MjA0LWY1YTY1M2FiYzQ1OQ=="
+              export DETECT_BDIO_OUTPUT_PATH="./artifacts"
+              export DETECT_DETECTOR_SEARCH_EXCLUSION=""
+              export DETECT_INCLUDED_DETECTOR_TYPES="COCOAPODS"
+              export DETECT_REPORT_TIMEOUT="3600"
+              export DETECT_RISK_REPORT_PDF="true"
+              export DETECT_RISK_REPORT_PDF_PATH="./artifacts"
+              bash <(curl -s -L https://detect.synopsys.com/detect.sh)
+    pool:
+        vmImage: 'ubuntu-latest'
 
-- task: CopyFiles@2
-  inputs:
-    contents: '**/*.apk'
-    targetFolder: '$(build.artifactStagingDirectory)'
-  displayName: Copy .apk files to artifact staging directory
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)'
-    artifactName: 'drop'
-    artifactType: 'container'
-  displayName: Publish artifacts
+        steps:
+        - task: Gradle@2
+        inputs:
+          workingDirectory: ''
+          gradleWrapperFile: 'gradlew'
+          gradleOptions: '-Xmx3072m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.8'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: true
+          testResultsFiles: '**/TEST-*.xml'
+          tasks: 'assembleDebug test'
+          displayName: gradlew assembleDebug test
 
 trigger:
   - develop
+
+
