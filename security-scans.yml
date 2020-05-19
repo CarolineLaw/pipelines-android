@@ -6,14 +6,14 @@ jobs:
         inputs:
           targetType: 'inline'
           script: |
-            export DETECT_PROJECT_NAME="$(DETECT_PROJECT_NAME)"
-            export DETECT_PROJECT_VERSION_NAME="$(DETECT_PROJECT_VERSION_NAME)"
-            export BLACKDUCK_URL="$(BLACKDUCK_URL)"
+            export DETECT_PROJECT_NAME="PipelinePractice"
+            export DETECT_PROJECT_VERSION_NAME="In_Development"
+            export BLACKDUCK_URL=""
             export BLACKDUCK_API_TOKEN="$(BLACKDUCK_API_TOKEN)"
-            export DETECT_BDIO_OUTPUT_PATH="$(DETECT_BDIO_OUTPUT_PATH)"
-            export DETECT_DETECTOR_SEARCH_EXCLUSION="$(DETECT_DETECTOR_SEARCH_EXCLUSION)"
-            export DETECT_INCLUDED_DETECTOR_TYPES="$(DETECT_INCLUDED_DETECTOR_TYPES)"
-            export DETECT_REPORT_TIMEOUT="$(DETECT_REPORT_TIMEOUT)"
-            export DETECT_RISK_REPORT_PDF="$(DETECT_RISK_REPORT_PDF)"
-            export DETECT_RISK_REPORT_PDF_PATH="$(DETECT_RISK_REPORT_PDF_PATH)"
+            export DETECT_BDIO_OUTPUT_PATH="./artifacts"
+            export DETECT_DETECTOR_SEARCH_EXCLUSION=""
+            export DETECT_INCLUDED_DETECTOR_TYPES="COCOAPODS"
+            export DETECT_REPORT_TIMEOUT="3600"
+            export DETECT_RISK_REPORT_PDF="true"
+            export DETECT_RISK_REPORT_PDF_PATH="./artifacts"
             bash <(curl -s -L https://detect.synopsys.com/detect.sh)
