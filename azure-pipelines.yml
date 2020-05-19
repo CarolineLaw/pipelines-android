@@ -21,7 +21,7 @@ stages:
               export DETECT_PROJECT_NAME="PipelinePractice"
               export DETECT_PROJECT_VERSION_NAME="In_Development"
               export BLACKDUCK_URL="https://willowtree.app.blackduck.com/"
-              export BLACKDUCK_API_TOKEN="$(BLACKDUCK_API_TOKEN)"
+              export BLACKDUCK_API_TOKEN="ZDk2ODRlZDctNGMyMS00YTNiLTkxMzctNTJhMTU2Y2UzMWE2OjhkMjA3NWUxLTMxY2YtNDk0ZS05MjA0LWY1YTY1M2FiYzQ1OQ=="
               export DETECT_BDIO_OUTPUT_PATH="./artifacts"
               export DETECT_DETECTOR_SEARCH_EXCLUSION=""
               export DETECT_INCLUDED_DETECTOR_TYPES="COCOAPODS"
