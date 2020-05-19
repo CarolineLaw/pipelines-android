@@ -8,7 +8,7 @@ jobs:
           script: |
             export DETECT_PROJECT_NAME="PipelinePractice"
             export DETECT_PROJECT_VERSION_NAME="In_Development"
-            export BLACKDUCK_URL=""
+            export BLACKDUCK_URL="https://willowtree.app.blackduck.com/"
             export BLACKDUCK_API_TOKEN="$(BLACKDUCK_API_TOKEN)"
             export DETECT_BDIO_OUTPUT_PATH="./artifacts"
             export DETECT_DETECTOR_SEARCH_EXCLUSION=""
