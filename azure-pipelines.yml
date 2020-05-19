@@ -3,14 +3,15 @@
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
+variables:
+  - group: Security Scanning tokens
+
 stages:
   - stage: Security
     displayName: "Security Scans - "
     dependsOn: []
     jobs:
       - template: security-scans.yml
-    variables:
-      - group: Security Scanning tokens
     pool:
         vmImage: 'ubuntu-latest'
 
