@@ -7,6 +7,8 @@ stages:
   - stage: Security
     displayName: "Security Scans - "
     dependsOn: []
+    variables:
+      - group: Security Scanning tokens
     jobs:
       - template: security-scans.yml
     pool:
