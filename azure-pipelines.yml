@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
 variables:
-      - group: Security-Scanning-tokens
+  - group: Security-Scanning-tokens
 
 stages:
   - stage: Security
