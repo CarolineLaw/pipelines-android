@@ -7,10 +7,10 @@ stages:
   - stage: Security
     displayName: "Security Scans - "
     dependsOn: []
-    variables:
-      - group: Security Scanning tokens
     jobs:
       - template: security-scans.yml
+    variables:
+      - group: Security Scanning tokens
     pool:
         vmImage: 'ubuntu-latest'
 
